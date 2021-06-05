@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Primes Algo</title>
+</head>
+<body>
+    <h1>Click here for the result</h1>
+	
+<input type="button" onclick="graph()" value="Prim's Minimum Spanning Tree Algorithm" />
+  <script>
+      function minKey(key,mstSet,V)
+{	var min=66000,min_index,v;
+	for(v=0;v<V;v++)
+	{	if(mstSet[v]==false && key[v]<=min)
+		{	min=key[v];min_index=v;
+		}	
+	}
+	return min_index;
+}
+function primMST(graph,src,v)
+{	alert(" in primMST");
+	var key=new Array(v);
+	var parent=new Array(v);
+	var mstSet=new Array(v),i;alert(" in primMST1");
+	for(i=0;i<v;i++)
+	{
+		key[i]=66000;mstSet[i]=false;
+	}
+	key[0]=src;
+	parent[src]=-1;
+	var count=0,n=0,u=0;alert(" in primMST2");
+	for(count=0;count<v-1;count++)
+	{
+		u=minKey(key,mstSet,v);
+		mstSet[u]=true;
+		for(n=0;n<v;n++)
+		{
+			if( !mstSet[n] && graph[u][n] && graph[u][n]<key[n])
+			{	parent[n]=u;key[n]=graph[u][n];
+			}
+		}
+	}
+	document.write("<Br/>Vertex:::Distance From Source Node 0<BR/>");
+	for(i=1;i<v;i++)
+	{	document.write(parent[i]+"--"+i+":::"+graph[i][parent[i]]+"<Br/>");
+	}	
+
+}
+function graph()
+{	alert("Hi");
+	var v,g,i,j;
+	v=parseInt(prompt("Enter total number of vertices :"));
+	g=new Array(v);
+	for(i=0;i<v;i++)
+		g[i]=new Array(v);
+	for(i=0;i<v;i++)
+	{	for(j=0;j<v;j++)
+		{	g[i][j]=-1;
+			
+		}
+	}
+	for(i=0;i<v;i++)
+	{	for(j=0;j<v;j++)
+		{	
+			if(i==j)
+			{
+				g[i][j]=0;
+			}else
+			{	if(g[i][j]==-1)
+				{
+				g[i][j]=parseInt(prompt("Enter distance of node "+i+" to node "+j+" :"));
+				g[j][i]=g[i][j];
+				}
+			}
+		}
+	}
+
+	document.write("<Br/>Total Vertyex="+v+"<Br/>Graph =<Br/>");
+	for(i=0;i<v;i++)
+	{	for(j=0;j<v;j++)
+		{	
+			document.write("    "+g[i][j]);
+		}
+		document.write("<Br/>");
+	}
+	primMST(g,0,v);
+
+}
+  </script>
+</body>
+</html>

@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Krushkal_algorithm</title>
+</head>
+<body>
+    Click here for the result
+<input type="button" onclick="graph()" value="Kruskal's Algorithm for minimum spanning tree" />
+    <script>
+        class Edge
+{	constructor(s=0,d=0,w=0)
+	{	//alert("in edge");
+		this.src=s;
+		this.dest=d;
+		this.weight=w;
+	}
+}
+class Graph
+{	constructor(v,e)
+	{	//alert("in graph");
+		this.V=v;
+		this.E=e;
+		//alert("in graph1");
+		this.Edges=new Array(this.E);
+		//alert("in graph2");
+		for(var i=0;i<this.E;i++)
+		{	this.Edges[i]=new Edge();
+		}//alert("in graph3");
+	}
+}
+class subset
+{	constructor()
+	{	this.parent;
+		this.rank;
+	}
+}
+function find(subsets,i)
+{	if(subsets[i].parent!=i)
+		subsets[i].parent=find(subsets,subsets[i].parent);
+	return subsets[i].parent;
+}
+function Union(subsets,x,y)
+{	var xroot=find(subsets,x);
+	var yroot=find(subsets,y);
+	if(subsets[xroot].rank<subsets[yroot].rank)
+		subsets[xroot].parent=yroot;
+	else if(subsets[xroot].rank>subsets[yroot].rank)
+		subsets[yroot].parent=xroot;
+	else
+	{	subsets[yroot].parent=xroot;
+		subsets[xroot].rank++;
+	}
+}
+
+function sort(g)
+{	var i,j,temp;
+	for(i=0;i<g.E;i++)
+	{	for(j=i+1;j<g.E;j++)
+		{	if(g.Edges[i].weight>g.Edges[j].weight)
+			{
+				temp=g.Edges[i].src;g.Edges[i].src=g.Edges[j].src;g.Edges[j].src=temp;
+				temp=g.Edges[i].dest;g.Edges[i].dest=g.Edges[j].dest;g.Edges[j].dest=temp;
+				temp=g.Edges[i].weight;g.Edges[i].weight=g.Edges[j].weight;g.Edges[j].weight=temp;
+			}
+		}
+	}
+}
+
+function KruskalMST(g)
+{	alert("In Kruskal");
+	var V=g.V;
+	var i,e;
+	var result=new Array(V);alert("In Kruskal1"+V);
+	for(i=0;i<V;i++){	result[i]=new Edge();	}
+	alert("In Kruskal1");
+	sort(g);
+	var subsets=new Array(V);
+	for(i=0;i<V;i++)
+	{	subsets[i]=new subset();
+		subsets[i].parent=i;
+		subsets[i].rank=0;
+	}e=0;i=0;
+	alert("In Kruskal2");
+	while(e<V-1 && i<g.E)
+	{	var next_edge=new Edge();
+		next_edge=g.Edges[i++];
+		var x=find(subsets,next_edge.src);
+		var y=find(subsets,next_edge.dest);
+		if(x!=y)
+		{	result[e++]=next_edge;
+			Union(subsets,x,y);
+		}
+	}
+	var minCost=0;
+	document.write("<Br/>Following are the edges in the constructed MST<Br/>");
+	for(i=0;i<e;i++)
+	{	document.write(result[i].src+"--"+result[i].dest+"=="+result[i].weight+"<Br/>");
+		minCost=minCost+result[i].weight;
+	}
+	document.write("Minimum Cost Spanning Tree :"+minCost+"<Br/>");
+}
+function graph()
+{	alert("Hi");var vt,ed;
+	vt=parseInt(prompt("Enter Total Vertex"));
+	ed=parseInt(prompt("Enter Total Edges"));
+	var i, g=new Graph(vt,ed);
+	for(i=0;i<g.E;i++)
+	{	g.Edges[i].src=parseInt(prompt("Enter Source"));
+		g.Edges[i].dest=parseInt(prompt("Enter Destinition"));
+		g.Edges[i].weight=parseInt(prompt("Enter Weight"));
+	}
+	document.write("<Br/>Graph("+g.V+","+g.E+")");
+	for(i=0;i<g.E;i++)
+	{	document.write("<Br/>"+g.Edges[i].src+" to "+g.Edges[i].dest+"weight="+g.Edges[i].weight);
+	}
+	KruskalMST(g);
+	/*sort(g);
+	document.write("<Br/>Graph("+g.V+","+g.E+")");
+	for(i=0;i<g.E;i++)
+	{	document.write("<Br/>"+g.Edges[i].src+" to "+g.Edges[i].dest+"weight="+g.Edges[i].weight);
+	}*/
+}
+/*
+Output:
+Graph(4,5)
+0 to 1weight=10
+0 to 2weight=6
+0 to 3weight=5
+1 to 3weight=15
+2 to 3weight=6
+Following are the edges in the constructed MST
+0--3==5
+0--2==6
+0--1==10
+Minimum Cost Spanning Tree :21
+
+
+
+Graph(9,14)
+0 to 1weight=4
+1 to 2weight=8
+2 to 3weight=7
+3 to 4weight=9
+4 to 5weight=10
+5 to 6weight=2
+6 to 7weight=1
+7 to 0weight=8
+1 to 7weight=11
+7 to 8weight=7
+8 to 2weight=2
+8 to 6weight=6
+2 to 5weight=4
+3 to 5weight=14
+Following are the edges in the constructed MST
+6--7==1
+5--6==2
+8--2==2
+0--1==4
+2--5==4
+2--3==7
+1--2==8
+3--4==9
+Minimum Cost Spanning Tree :37
+*/
+    </script>
+</body>
+</html>

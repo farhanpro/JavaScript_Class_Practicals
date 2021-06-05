@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Binary Search Tree</title>
+</head>
+<body>
+    <h1>Binary Search Tree</h1>
+    <script>
+        class Node {
+    constructor(data)
+    {
+
+
+        this.data=data;
+        this.left=null;
+        this.right=null;
+    }
+}
+class BST
+
+{
+ constructor()
+ {
+     this.root=null;
+     //this.size=0;
+ }   
+
+
+Create()
+{
+  
+   var newnode, temp;
+    var ch;
+     do
+    {
+         
+         var data=parseInt(prompt("enter data"));
+         newnode=new Node(data);
+         
+         if(this.root==null)
+         {this.root=newnode;
+            
+         }
+       else
+       {    temp=this.root;
+             while(temp)  
+            {   if(data<temp.data)
+                   {  if(temp.left==null)
+                        {  temp.left=newnode;
+                              break;
+                        }
+                        else
+                           temp=temp.left;
+                    }
+                    else
+                    {   
+                           if(data>temp.data)
+                            {  if(temp.right==null)
+                                   {  temp.right=newnode;
+                                                break;
+                                    }
+                                          else
+                                             temp=temp.right;
+                            }
+                    }//else
+            }//while
+            
+            
+        }    
+           ch=prompt("Do you want to insert node?");
+    }while(ch=='y')
+ }
+
+
+                   
+ getRootNode()
+ {    
+     return this.root;
+ }
+  
+ 
+Preorder(node)
+{
+        var temp;
+         temp=node;
+          if(temp!=null)
+           {   
+               str1=str1+temp.data;
+               this.Preorder(temp.left);
+                this.Preorder(temp.right);
+            }
+
+}
+
+Inorder(node)
+{
+        var temp;
+         temp=node;
+          if(temp!=null)
+          {   
+                this.Inorder(temp.left);
+                str2=str2+temp.data;
+                this.Inorder(temp.right);
+            }
+}
+
+Postorder(node)
+{
+        var temp;
+         temp=node;
+          if(temp!=null)
+          {   
+                this.Postorder(temp.left);
+                this.Postorder(temp.right);
+                str3=str3+temp.data;
+            }
+}
+  
+        
+ Insertnode()
+{
+  
+   var newnode,temp;
+    var ch;
+  
+    var data=parseInt(prompt("enter data"));
+    newnode=new Node(data);
+         
+         if(this.root==null)
+        { this.root=newnode;
+            
+        }
+       else
+       {     
+           temp=this.root;
+             
+             while(temp)  
+            {      
+                 if(data<temp.data)
+                   {    
+                       if(temp.left==null)
+                        {  temp.left=newnode;
+                              break;
+                        }
+                        else
+                           temp=temp.left;
+                    }
+                    else
+                    {   
+                           if(data>temp.data)
+                            {  if(temp.right==null)
+                                   {  temp.right=newnode;
+                                     
+                                    break;
+                                    }
+                                          else
+                                          {
+                                             temp=temp.right;
+                                               
+                                          }
+                            }
+                            
+                   }//else
+            }//while
+            
+            
+        }    
+        
+    
+ }        
+
+  Deletenode()
+{
+    var temp , tsucc; 
+    temp=this.root;
+    var key=parseInt(prompt("Enter node you want to delete" ));
+    var parent=null;
+       while(temp!=null && temp.data!=key)
+        {   parent=temp;  //parent always points to     
+                                         //     previous node.
+               if(key<temp.data)
+                   temp=temp.left;
+                 else
+                   temp=temp.right;
+        }
+        if(temp==null)
+           {   //Prompt(" Data not found”);
+               return;
+           }
+        else
+        {  if(temp.left!=null && temp.right!=null) // node have two child
+                {   parent=temp;
+                       tsucc=temp.right;
+                        while(tsucc.left!=null)
+                         {  parent=tsucc;
+                             tsucc=tsucc.left;
+                          }
+                         temp.data=tsucc.data;
+                         temp=tsucc;
+                }
+                   
+           if(temp.left==null && temp.right==null)    // Node have no child
+           {
+                if(parent.left==temp)
+                    parent.left=null;
+                 else
+                    parent.right=null;
+                  //delete temp;
+                  temp=null;
+                   return;
+           }
+           if(temp.left!=null && temp.right==null)     // Node have one left child
+           {  if(parent.left==temp)
+               parent.left=temp.left;
+               else
+               parent.right=temp.left;
+                //delete(temp);
+                temp=null;
+                  return;
+           }
+           if(temp.right!=null && temp.left==null)   // Node have one Right child
+           {  if(parent.left==temp)
+               parent.left=temp.right;
+               else
+                 parent.right=temp.right;
+                //delete(temp);
+                temp=null;
+                  return;
+            }
+        }                       
+} 
+ 
+}
+var tree=new BST();
+
+
+ 
+do{
+ var ch=parseInt(prompt("1.Create  2.Preorder 3.Inorder 4.Postorder  5.Insert Node 6.Delete Node  7.Exit:"));
+ var str1="";
+var str2="";
+var str3="";
+ switch(ch)
+ {
+    case 1 : tree.Create();break; 
+    case 2 : tree.Preorder(tree.getRootNode());
+             prompt(str1);
+             break; 
+    case 3 : tree.Inorder(tree.getRootNode());
+             prompt(str2);
+             break; 
+    case 4 : tree.Postorder(tree.getRootNode());
+              prompt(str3);
+              break; 
+               
+    case 5 : tree.Insertnode(); break;
+    case 6 : tree.Deletenode(); break;
+    case 7 : break;
+    default : alert("Wrong choice");
+ }
+		
+}while(ch!=7);	
+
+    </script>
+</body>
+</html>

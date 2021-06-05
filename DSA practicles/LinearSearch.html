@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LinearSearch</title>
+</head>
+<body  onload="linear_search()">
+    <h1> Linear Search </h1>
+
+
+    <script>
+        function linear_search(){
+
+var found=0;
+var size= parseInt(prompt("Enter the size of an array"));
+
+var a = new Array(size);
+
+
+
+for (var i=0; i<a.length; i++){
+    
+    a[i] = parseInt(prompt("Enter Array Elements"));
+
+}
+var  input = parseInt(prompt("Enter the Key Element to Search :"));
+ 
+  for(var i=0;i<a.length;i++){
+      if(input == a[i]){
+            found=1;
+            break;
+      }
+  }
+  if(found==1){
+         document.writeln("Element Found at " + a[i] + "Found at Position :" + i);  
+  }
+  else {
+      document.writeln("Element Not Found !");
+  }
+
+}
+
+    </script>
+</body>
+</html>

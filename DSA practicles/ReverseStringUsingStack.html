@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reverse String Using Stack</title>
+</head>
+<body>
+    <h1>Reverse String Using Stack </h1>
+    <script>
+        class Stack {
+    constructor()
+    {
+        this.data = [];
+        this.top = 0;
+    }
+    push(ch)
+     {  
+      this.data[this.top] = ch;
+      this.top = this.top + 1;
+    }
+   length()
+    {
+      return this.top;
+   }
+   top() 
+   {
+      return this.data[this.top-1];
+   }
+   isEmpty() 
+   {
+     return this.top === 0;
+   }
+   pop()
+    {
+    if( this.isEmpty() === false )
+     {
+       this.top = this.top -1;
+       return this.data.pop(); // removes the last element
+     }
+
+    }
+    
+    
+    Reverse(str1)
+    {   
+       
+      for(var i=0;i<=str1.length-1;i++)  
+      {    ;
+         this.push(str1[i]);
+      }
+      for(var i=this.top-1;i>=0;i--)  
+      {  
+         str2=str2+this.pop();
+         
+      }
+     prompt(str2);
+
+    }
+}
+
+var s1=new Stack();
+var str1,str2="";
+do{
+ var ch=parseInt(prompt("1.Enter String 2.Reverse  3.Exit:"));
+ switch(ch)
+ {
+    case 1 : var str1=prompt("Enter string");break; 
+    case 2 : s1.Reverse(str1); 
+             break; 
+    case 3 : break;
+    default : alert("Wrong choice");
+ }
+		
+}while(ch!=3);	
+    </script>
+</body>
+</html>

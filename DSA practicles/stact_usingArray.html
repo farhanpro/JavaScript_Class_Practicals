@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>stack_usingArray</title>
+</head>
+<body>
+    <h1>stack_usingArray</h1>
+    <script>
+        class Stack {
+    constructor()
+    {
+        this.data = [];
+        this.top = 0;
+    }
+    push()
+     {  var ch=parseInt(prompt("Enter Your Data"));
+      this.data[this.top] = ch;
+      this.top = this.top + 1;
+    }
+   length()
+    {
+      return this.top;
+   }
+   top() 
+   {
+      return this.data[this.top-1];
+   }
+   isEmpty() 
+   {
+     return this.top === 0;
+   }
+   pop()
+    {
+    if( this.isEmpty() === false )
+     {
+       this.top = this.top -1;
+       return this.data.pop(); // removes the last element
+     }
+
+    }   
+    
+    Display()
+    {   var str="";
+         var count;
+         if(this.isEmpty()===false)
+        {  
+           
+            count=this.top-1;
+
+           while(count!=-1)
+           {
+              str=str+this.data[count];
+              count--;
+           }
+           
+           prompt(str);
+        }  
+    }
+}
+
+var s1=new Stack();
+do{
+ var ch=parseInt(prompt("1.Push  2.POP  3.Display  4.Exit:"));
+ switch(ch)
+ {
+    case 1 : s1.push();break; 
+    case 2 : var ch=s1.pop(); prompt(ch); break; 
+    case 3 : console.log(ch);s1.Display(); break; 
+    case 4 : break;
+    default : alert("Wrong choice");
+ }
+		
+}while(ch!=4);	
+    </script>
+</body>
+</html>

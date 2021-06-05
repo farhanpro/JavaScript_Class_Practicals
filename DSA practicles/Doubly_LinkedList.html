@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Doubly Linked List</title>
+</head>
+<body>
+    <script>
+        
+class Node {
+    constructor(data)
+    {
+
+
+        this.data=data;
+        this.next=null;
+        this.prev=null;
+    }
+}
+class LinkedList
+
+{
+ constructor()
+ {
+     this.head=null;
+     this.size=0;
+ }   
+
+
+Create()
+ {
+  
+     var n=prompt("How many nodes you want to create:");
+     for(var i=1;i<=n;i++) 
+     {
+        var data=prompt("enter data");
+
+    var node=new Node(data); // create a node
+   var temp;
+
+   if( this.head==null)
+   {
+       this.head=node;
+   }
+   else{
+        temp=this.head;
+        while(temp.next!=null)
+        {
+            temp=temp.next;
+        }
+        temp.next=node;
+        node.prev=temp;
+   }
+this.size++;
+
+ }
+ }
+PrintList()
+{
+    var temp=this.head;
+     var str="";
+    while(temp){
+        //console.log(curr.data);  
+        //document.write("</br>"+temp.data);
+        str=""+str+""+temp.data;
+    temp=temp.next;
+    
+    }
+   
+   //console.log(this.size);
+//   document.write("</br>"+this.size);
+   prompt(str);
+
+}
+
+
+Insertnode()
+{
+    var pos=parseInt(prompt("Enter Position"));
+    var data=parseInt(prompt("Enter data"));
+    var newnode=new Node(data); // create a node
+    var i;
+      if(pos==1){
+          newnode.next=this.head;
+          this.head.prev=newnode;
+          this.head=newnode;
+
+      }
+      else{
+        var temp=this.head;
+          for(i=1;i<pos-1;i++)
+          {
+              temp=temp.next;
+
+          }
+
+          newnode.next=temp.next;
+          temp.next=newnode;
+          newnode.prev=temp;
+        }
+
+
+
+
+
+}
+
+/*
+Deletenodebyval()      //Delete node by value
+{
+    var temp;
+    var temp1;
+
+    var val=prompt("enter node data you want to delete");
+    temp=this.head;
+   
+    if(temp.data==val)      //Deleting First Node
+    {
+          this.head=temp.next;  
+         // this.head=this.head.next;
+         this.size--;
+    }
+    else
+    {
+        while(temp)
+        {
+            temp1=temp;
+            temp=temp.next;
+            if(temp.data==val)            
+            {
+                temp1.next=temp.next;
+                this.size--;
+                break;
+
+            }
+        }
+    }    
+
+
+}
+*/
+Deletenode()             // Delete node by its position
+{
+    var temp;
+    var i;
+
+    var pos=parseInt(prompt("Enter Position which node you want to delete"));
+    if(pos==1)
+    {
+        this.head=this.head.next;
+    }
+    else{
+        temp=this.head;
+        for(i=1;i<pos-1;i++)
+        {
+            temp=temp.next;
+        }
+        var temp1;
+        temp1=temp.next;
+        temp.next=temp1.next;
+    }
+}
+
+}
+
+
+ var dl1=new LinkedList();
+do{
+ var ch=parseInt(prompt("1.Create  2.Insert Node  3.Delete Node  4.Display  5.Exit:"));
+ switch(ch)
+ {
+    case 1 : dl1.Create();break; 
+    case 2 : dl1.Insertnode(); break; 
+    case 3 : dl1.Deletenode(); break; 
+    case 4 : dl1.PrintList(); break; 
+    case 5 : break;
+    default : alert("Wrong choice");
+ }
+		
+}while(ch!=5);
+
+
+    </script>
+</body>
+</html>

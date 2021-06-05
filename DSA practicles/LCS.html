@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LCS</title>
+</head>
+<body>
+    <h1>LCS</h1>
+    <script>
+                    var str1 = prompt("Enter First String");
+        var str2 = prompt("Enter Second String");
+        var answer = solution(str1,str2);
+
+        console.log(answer);
+
+        function solution(str1, str2) {
+            str1 = str1.split('')
+            str2 = str2.split('')
+
+            const output = []
+
+            for (let i = str1.length - 1; i >= 0; i--) {
+                for (let j = str2.length - 1; j >= 0; j--) {
+                    if (str2[j] === str1[i]) {
+                        output.push(str2[j])
+                        break
+                    }
+                }
+
+            }
+            return output.reverse().join('')
+        }
+
+    </script>
+</body>
+</html>

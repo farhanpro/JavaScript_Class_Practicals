@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Stack Using Linked List</title>
+</head>
+<body>
+    <h1>Stack Using Linked List</h1>
+    <script>
+        class Node {
+    constructor(data)
+    {
+        this.data=data;
+        this.next=null;
+        
+    }
+}
+class Stack
+{
+ constructor()
+ {
+     this.top=null;
+     this.size=0;
+ }   
+
+Push()
+{
+    var data=parseInt(prompt("Enter data"));
+    var newnode=new Node(data); // create a node
+    if(this.top==null)
+    {
+        this.top=newnode;
+
+    }
+    else{
+        newnode.next=this.top;
+        this.top=newnode;
+    }
+}
+Pop()
+{ var temp;
+    temp=this.top;
+    if(this.top==null)
+    {
+        alert("Stack underflow:");
+    }
+    else{
+    this.top=this.top.next;
+    //document.write(temp.data);
+    alert("Poped item is:"+temp.data);
+    }
+
+
+}
+Display()
+{
+    var temp;
+    var str="";
+    temp=this.top;
+
+    while(temp)
+    {    
+        
+        str=str+" "+temp.data;
+
+        //document.write("</br>"+temp.data);
+        temp=temp.next;
+
+    }
+    alert("Stack data are:"+str);
+    
+}
+}
+
+
+
+ var S1=new Stack();
+do{
+ var ch=parseInt(prompt("1.Push  2.Pop 3.Display  4.Exit:"));
+ switch(ch)
+ {
+    case 1 : S1.Push();break; 
+    case 2 : S1.Pop(); break; 
+    case 3 : S1.Display(); break; 
+    case 4 : break;
+    default : alert("Wrong choice");
+ }
+		
+}while(ch!=4);	
+    </script>
+</body>
+</html>

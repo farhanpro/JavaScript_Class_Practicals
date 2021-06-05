@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Circular Queue</title>
+</head>
+<body>
+    <h1>Circular Queue</h1>
+    <script>
+        class CircularQueue {
+    constructor(size) {
+     this.element = [];
+     this.size = size
+     this.length = 0
+     this.front = 0
+     this.back = -1
+    }
+   isEmpty() {
+     return (this.length == 0)
+    }
+   enqueue(element) {
+     if (this.length >= this.size) throw (new Error("Maximum length exceeded"))
+     //
+     if(this.back==this.size-1)
+     {
+         this.back=0;
+     }
+     else
+     this.back++
+      this.element[this.back % this.size] = element
+     
+      this.length++
+      
+      console.log('Enqueue :['+this.back+']='+this.element);
+      console.log('Rear='+this.back);
+    }
+   dequeue() {
+     if (this.isEmpty()) throw (new Error("No elements in the queue"))
+     const value = this.getFront()
+     this.element[this.front % this.size] = null
+      
+     console.log('Dequeue :['+this.front+']='+this.element);
+     
+     if(this.front==this.size-1)
+     {
+     this.front=0;
+     }
+     else
+     {
+     this.front++
+     }
+     this.length--
+
+     console.log('Front='+this.front);
+          return value
+    }
+   getFront() {
+     if (this.isEmpty()) throw (new Error("No elements in the queue"))
+     return this.element[this.front % this.size]
+    }
+   clear() {
+     this.element = new Array()
+     this.length = 0
+     this.back = 0
+     this.front = -1
+    }
+ 
+   }
+
+   //
+   var q = new CircularQueue(4); 
+q.enqueue(10); 
+q.enqueue(20); 
+
+
+console.log('****************');
+q.dequeue(); 
+
+console.log('****************');
+q.enqueue(30); 
+q.enqueue(40); 
+q.enqueue(50); 
+
+console.log('****************');
+q.dequeue(); 
+q.dequeue(); 
+    </script>
+</body>
+</html>
